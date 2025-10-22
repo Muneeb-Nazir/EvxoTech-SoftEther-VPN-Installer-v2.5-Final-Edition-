@@ -1,0 +1,84 @@
+🔔 Next recommended steps
+1️⃣ Start the config UI (VPNCMD)
+sudo /usr/local/vpnserver/vpncmd
+
+
+Select:
+
+1. Management of VPN Server or Bridge
+
+
+Then press Enter for localhost.
+
+2️⃣ Enable L2TP/IPSec (Recommended)
+
+Inside VPNCMD:
+
+IPsecEnable
+
+
+Enable:
+
+Enable L2TP Server Function? Yes
+Enable L2TP over IPsec? Yes
+Enable EtherIP / L2TPv3 over IPsec Server Function? No
+Pre Shared Key: (your_password)
+
+3️⃣ Create a Virtual Hub
+HubCreate MYVPN
+
+
+Set admin password.
+
+4️⃣ Create a VPN user
+UserCreate muneeb /GROUP:none /REALNAME:none /NOTE:none
+UserPasswordSet muneeb
+
+5️⃣ Enable SecureNAT (Most common)
+SecureNatEnable
+
+
+This gives DHCP/NAT automatically.
+
+6️⃣ OpenVPN compatibility file
+
+Generate:
+
+OpenVpnEnable yes
+OpenVpnMakeConfig
+
+
+It will output .ovpn files in:
+
+/usr/local/vpnserver/
+
+✅ Access GUI Manager
+Windows SoftEther VPN Server Manager
+
+Download from SoftEther official.
+
+Connect to your Proxmox LXC IP on port 5555:
+
+Example:
+
+10.120.80.90:5555
+
+
+Enter your hub/server password.
+
+🚨 If connecting from external internet
+
+Make sure these ports are forwarded:
+
+Port	Protocol
+443	TCP + UDP
+500	UDP
+4500	UDP
+1194	TCP + UDP
+🧠 Reminder
+
+Since this is inside Proxmox LXC:
+
+✅ Works for all VMs/LXCs
+✅ Allows remote access to everything
+✅ Perfect for secure Proxmox management
